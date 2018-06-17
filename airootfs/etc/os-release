@@ -1,0 +1,8 @@
+NAME="Selene OS"
+PRETTY_NAME="Selene OS"
+ID=seleneos
+ID_LIKE=archlinux
+ANSI_COLOR="0;36"
+HOME_URL="https://github.com/SeleneOS/SeleneOS"
+SUPPORT_URL="https://github.com/SeleneOS/SeleneOS"
+BUG_REPORT_URL="https://github.com/SeleneOS/SeleneOS/issues"
