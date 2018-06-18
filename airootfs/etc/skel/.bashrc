@@ -1,0 +1,1 @@
+[[ -f ~/.acharluk/.bashrc ]] && . ~/.acharluk/.bashrc

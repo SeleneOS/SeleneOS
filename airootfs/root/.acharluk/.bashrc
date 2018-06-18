@@ -10,8 +10,8 @@ alias ls='ls --color=auto'
 
 ## Custom ACharluk ##
 
-if [ -f ~/.bash_aliases ]; then
-. ~/.bash_aliases
+if [ -f ~/.acharluk/.bash_aliases ]; then
+. ~/.acharluk/.bash_aliases
 fi
 
 #region $PS1

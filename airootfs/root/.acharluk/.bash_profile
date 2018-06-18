@@ -1,9 +1,8 @@
-~/.automated_script.sh
 #
 # ~/.bash_profile
 #
 
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+[[ -f ~/.acharluk/.bashrc ]] && . ~/.acharluk/.bashrc
 
 
 ## Custom ACharluk ##
