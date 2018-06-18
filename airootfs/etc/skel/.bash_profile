@@ -1,2 +1,2 @@
 ~/.automated_script.sh
-[[ -f ~/.acharluk/.bash_profile ]] && . ~/.acharluk/.bash_profile
+[[ -f /home/live/.acharluk/.bash_profile ]] && . /home/live/.acharluk/.bash_profile
