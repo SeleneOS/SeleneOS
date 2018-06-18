@@ -1,0 +1,16 @@
+#!/bin/bash
+
+backup=~/.acharluk/backups/last
+
+if [ -d $backup ]; then
+	echo "Restoring .bashrc"
+	cp $backup/.bashrc ~/.bashrc
+	echo "Restoring .bash_aliases"
+	cp $backup/.bash_aliases ~/.bash_aliases
+	echo "Restoring .bash_profile"
+	cp $backup/.bash_profile ~/.bash_profile
+	echo "Restoring .vimrc"
+	cp $backup/.vimrc ~/.vimrc
+else
+	echo "No backup found in $backup"
+fi

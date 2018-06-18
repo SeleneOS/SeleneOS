@@ -1,0 +1,12 @@
+#!/bin/bash
+
+options="Lock\nPower off\nReboot\nSuspend\nExit i3"
+selected=$(echo -e $options | dmenu -i)
+
+case $selected in
+	"Lock") i3lock -c 282828;;
+	"Power off") systemctl poweroff;;
+	"Reboot") systemctl reboot;;
+	"Suspend") systemctl suspend;;
+	"Exit i3") i3-msg exit;;
+esac

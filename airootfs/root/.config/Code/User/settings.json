@@ -1,0 +1,39 @@
+{
+    "editor.fontFamily": "'Fira Code Retina', 'Hack', 'monospace', 'Droid Sans Fallback'",
+    "editor.fontLigatures": true,
+    "editor.renderIndentGuides": true,
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.renderLineHighlight": "all",
+    "editor.cursorStyle": "block",
+    "editor.cursorBlinking": "smooth",
+    "editor.smoothScrolling": true,
+    "editor.wordWrap": "on",
+
+    "window.zoomLevel": 2,
+    "window.menuBarVisibility": "toggle",
+
+    "workbench.activityBar.visible": false,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.editor.tabCloseButton": "off",
+    "workbench.editor.labelFormat": "medium",
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.startupEditor": "none",
+    "workbench.tree.horizontalScrolling": true,
+
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.openEditors.visible": 0,
+
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+
+    "extensions.showRecommendationsOnlyOnDemand": true,
+
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+
+    "telemetry.enableTelemetry": false,
+}

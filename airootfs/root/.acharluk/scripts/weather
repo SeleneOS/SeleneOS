@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# $LOCATION is defined in .bash_profile
+if [[ $# -eq 1 ]]; then
+	curl "wttr.in/~$1";
+else
+	curl "wttr.in/~$LOCATION";
+fi

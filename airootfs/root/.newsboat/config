@@ -1,0 +1,14 @@
+bind-key RIGHT pagedown
+bind-key LEFT pageup
+bind-key a toggle-article-read
+bind-key r reload-all
+bind-key R reload
+
+browser linkhandler
+macro , open-in-browser
+macro v set browser "xfce4-terminal -T dropdown_hidden -e 'mpv %u --fullscreen'"; open-in-browser ; set browser linkhandler
+macro b set browser "xfce4-terminal -T dropdown_hidden -e 'mpv %u --no-video'"; open-in-browser ; set browser linkhandler
+macro d set browser "xfce4-terminal -T dropdown_hidden -e '%\'youtube-dl -o ~/videos/%%\(title\)s-%%\(id\)s.%%\(ext\)s%\' %u'"; open-in-browser ; set browser linkhandler
+macro w set browser "w3m"; open-in-browser ; set browser linkhandler
+macro c set browser "chromium"; open-in-browser ; set browser linkhandler
+macro r set browser "rtv"; open-in-browser ; set browser linkhandler

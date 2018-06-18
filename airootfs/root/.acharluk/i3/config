@@ -1,0 +1,368 @@
+#region App paths
+
+set $_terminal	        xfce4-terminal # i3-sensible-terminal
+
+set $_internet_browser	chromium
+set $_code_editor       code
+set $_messaging_app	~/Apps/Telegram/Telegram
+set $_music_player	clementine
+set $_file_manager      nautilus
+
+#endregion
+
+
+#region Other variables
+
+set $_wallpaper_path	~/.acharluk/wallpaper.png
+
+set $_menu_apps "(C)ode (G)oogle (T)elegram"
+
+## MPC bindings
+# set $pause      --no-startup-id mpc toggle
+# set $next       --no-startup-id mpc next
+# set $prev       --no-startup-id mpc prev
+
+## Clementine bindings
+set $pause      --no-startup-id qdbus-qt4 org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 PlayPause
+set $next       --no-startup-id qdbus-qt4 org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Next
+set $prev       --no-startup-id qdbus-qt4 org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Previous
+
+#endregion
+
+
+#region Workspace names
+
+set $_workspace_1	internet
+set $_workspace_2	terminal
+set $_workspace_3	vscode
+set $_workspace_4	4
+set $_workspace_5	5
+set $_workspace_6	6
+set $_workspace_7	7
+set $_workspace_8	8
+set $_workspace_9	telegram
+set $_workspace_10	music
+
+#endregion
+
+
+#region Assign apps to workspaces
+
+assign [class="Chromium"]       $_workspace_1
+assign [class="Code"]           $_workspace_3
+assign [class="Telegram"]       $_workspace_9
+assign [class="Clementine"]       $_workspace_10
+
+#endregion
+
+
+#region App-specific configuration
+
+for_window [class="^.*"]        border pixel 3
+for_window [class="Chromium"]   border none
+for_window [class="Code"]       border none
+for_window [class="Telegram"]   border none
+for_window [class="Clementine"]   border none
+
+        #region Scratchpad
+
+        # Terminal
+        for_window [title="dropdown_terminal"] floating enable
+        for_window [title="dropdown_terminal"] resize set 1366 768
+        for_window [title="dropdown_terminal"] move scratchpad
+
+        exec xfce4-terminal -T dropdown_terminal
+
+        bindsym $mod+grave [title="dropdown_terminal"] scratchpad show; [title="dropdown_terminal"] move position center
+        bindsym $mod+shift+grave exec xfce4-terminal -T dropdown_terminal
+
+        # Ranger
+        for_window [title="floating_ranger"] floating enable
+        for_window [title="floating_ranger"] resize set 1366 768
+        for_window [title="floating_ranger"] move scratchpad
+
+        exec --no-startup-id xfce4-terminal -e ranger -T floating_ranger
+
+        bindsym $mod+F2 [title="floating_ranger"] scratchpad show; [title="floating_ranger"] move position center
+        bindsym $mod+shift+F2 exec --no-startup-id xfce4-terminal -e ranger -T floating_ranger
+
+        # Hidden terminal
+        for_window [title="dropdown_hidden"] floating enable
+        for_window [title="dropdown_hidden"] resize set 1366 768
+        for_window [title="dropdown_hidden"] move scratchpad
+
+        bindsym $mod+F12 [title="dropdown_hidden"] scratchpad show; [title="dropdown_hidden"] move position center
+
+        #endregion
+
+#endregion
+
+
+#region Keybindings
+
+        #region Workspaces
+
+        # Cycle through workspaces
+        bindsym $mod+Ctrl+Right workspace next
+        bindsym $mod+Ctrl+Left  workspace prev
+
+        # Switch to workspace
+        bindsym $mod+1 workspace $_workspace_1
+        bindsym $mod+2 workspace $_workspace_2
+        bindsym $mod+3 workspace $_workspace_3
+        bindsym $mod+4 workspace $_workspace_4
+        bindsym $mod+5 workspace $_workspace_5
+        bindsym $mod+6 workspace $_workspace_6
+        bindsym $mod+7 workspace $_workspace_7
+        bindsym $mod+8 workspace $_workspace_8
+        bindsym $mod+9 workspace $_workspace_9
+        bindsym $mod+0 workspace $_workspace_10
+
+        # Move focused container to workspace
+        bindsym $mod+Shift+1 move container to workspace $_workspace_1
+        bindsym $mod+Shift+2 move container to workspace $_workspace_2
+        bindsym $mod+Shift+3 move container to workspace $_workspace_3
+        bindsym $mod+Shift+4 move container to workspace $_workspace_4
+        bindsym $mod+Shift+5 move container to workspace $_workspace_5
+        bindsym $mod+Shift+6 move container to workspace $_workspace_6
+        bindsym $mod+Shift+7 move container to workspace $_workspace_7
+        bindsym $mod+Shift+8 move container to workspace $_workspace_8
+        bindsym $mod+Shift+9 move container to workspace $_workspace_9
+        bindsym $mod+Shift+0 move container to workspace $_workspace_10
+
+        #endregion
+
+
+        #region Menus (modes)
+
+        bindsym $mod+space      exec rofi -show drun
+        bindsym $mod+Tab        exec rofi -show window
+        bindsym $mod+Delete     exec acl_dmenu_power
+
+        #endregion
+
+
+        #region Media keys
+
+        bindsym XF86AudioRaiseVolume    exec pamixer --increase 2  && pkill -SIGRTMIN+11 i3blocks && dunstify -t 1000 -r 1 "Volume: $(pamixer --get-volume)%"
+        bindsym XF86AudioLowerVolume    exec pamixer --decrease 2  && pkill -SIGRTMIN+11 i3blocks && dunstify -t 1000 -r 1 "Volume: $(pamixer --get-volume)%"
+        bindsym Shift+XF86AudioRaiseVolume    exec pamixer --increase 10  && pkill -SIGRTMIN+11 i3blocks && dunstify -t 1000 -r 1 "Volume: $(pamixer --get-volume)%"
+        bindsym Shift+XF86AudioLowerVolume    exec pamixer --decrease 10  && pkill -SIGRTMIN+11 i3blocks && dunstify -t 1000 -r 1 "Volume: $(pamixer --get-volume)%"
+        bindsym XF86AudioMute           exec pamixer --toggle-mute && pkill -SIGRTMIN+11 i3blocks && dunstify -t 1000 -r 2 "Muted: $(pamixer --get-mute)"
+        bindsym $mod+F1                 exec --no-startup-id pavucontrol
+        bindsym XF86AudioNext		exec $next
+        bindsym XF86AudioPlay		exec $pause
+        bindsym XF86AudioPrev		exec $prev
+        bindsym XF86AudioStop		exec $pause
+
+        #endregion
+
+
+        #region Brightness
+
+        bindsym XF86MonBrightnessUp         exec --no-startup-id /usr/bin/xbacklight -inc 10 && dunstify -t 1000 -r 3 "Brightness: $(xbacklight -get)%"
+        bindsym XF86MonBrightnessDown       exec --no-startup-id /usr/bin/xbacklight -dec 10 && dunstify -t 1000 -r 3 "Brightness: $(xbacklight -get)%"
+        bindsym shift+XF86MonBrightnessUp   exec --no-startup-id /usr/bin/xbacklight -inc 2  && dunstify -t 1000 -r 3 "Brightness: $(xbacklight -get)%"
+        bindsym shift+XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec 2  && dunstify -t 1000 -r 3 "Brightness: $(xbacklight -get)%"
+
+        #endregion
+
+        #region Screen capture
+
+        bindsym Print   		exec --no-startup-id maim    | xclip -selection clipboard -t image/png && dunstify -t 2000 "Screeshot saved to clipboard"
+        bindsym $mod+Print       	exec --no-startup-id maim -s | xclip -selection clipboard -t image/png && dunstify -t 2000 "Screeshot saved to clipboard"
+        bindsym Shift+Print 		exec --no-startup-id maim    > ~/pictures/screenshots/$(date +%F_%R:%S_%N).png && dunstify -t 2000 "Screeshot saved to file"
+        bindsym $mod+Shift+Print        exec --no-startup-id maim -s > ~/pictures/screenshots/$(date +%F_%R:%S_%N).png && dunstify -t 2000 "Screeshot saved to file"
+
+        #endregion
+
+        #region Other
+
+        bindsym $mod+p          exec --no-startup-id "killall screenkey || screenkey"
+        bindsym XF86Search      exec $_file_manager
+        bindsym Pause           exec --no-startup-id "killall compton || compton"
+
+        #endregion
+
+#endregion
+
+
+#region i3 customization
+
+gaps inner 10
+gaps outer 10
+
+bindsym $mod+shift+w gaps inner all plus 5; gaps outer all plus 5
+bindsym $mod+shift+s gaps inner all minus 5; gaps outer all minus 5
+bindsym $mod+shift+a gaps inner all set 0; gaps outer all set 0
+bindsym $mod+shift+d gaps inner all set 10; gaps outer all set 10
+
+#endregion
+
+
+#region Menus (Modes)
+
+        #region Bar
+
+        # Start i3bar to display a workspace bar (plus the system information i3status
+        # finds out, if available)
+        bar {
+                font pango:Hack, FontAwesome 12
+                status_command i3blocks -c ~/.acharluk/i3/i3blocks.config
+                i3bar_command  i3bar -t
+
+                colors {
+	   		background #21242b00
+			statusline #d3dae3cc
+			separator  #585e7488
+			#	           border    backgr    text
+			focused_workspace  #282e3400 #282e3400 #ddddddcc
+			inactive_workspace #21242b00 #21242b00 #7c818ccc
+			urgent_workspace   #5294e200 #5294e2cc #eeeeeecc
+	        }
+        }
+
+        #endregion
+
+#endregion
+
+
+#region i3-configuration
+
+
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Hack 12
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec $_terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+# bindsym $mod+shift+d exec dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+# bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+#endregion
+
+
+#region Run at start (once)
+
+exec --no-startup-id compton
+# exec $_internet_browser
+# exec $_code_editor
+
+#endregion
+
+
+#region Run at start (always)
+
+exec_always --no-startup-id feh --bg-fill $_wallpaper_path
+# exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+#endregion

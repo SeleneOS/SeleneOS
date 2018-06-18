@@ -1,0 +1,43 @@
+#!/bin/bash
+
+base_path=~/.acharluk/diary
+
+current_day=$(date '+%d')
+current_month=$(date '+%m')
+current_year=$(date '+%Y')
+
+if [ $# -eq 1 ]; then
+	current_day=$1
+elif [ $# -eq 2 ]; then
+	current_month=$1
+	current_day=$2
+elif [ $# -eq 3 ]; then
+	current_year=$1
+	current_month=$2
+	current_day=$3
+fi
+
+full_date=$current_year-$current_month-$current_day
+date -d "$full_date" &> /dev/null
+if [ $? -ne 0 ]; then
+	echo "Diary error: Invalid date -> $full_date";
+	exit 1;
+else
+	current_year=$(date -d "$full_date" '+%Y')
+	current_month=$(date -d "$full_date" '+%m')
+	current_day=$(date -d "$full_date" '+%d')
+fi
+
+working_folder=$base_path/$current_year/$current_month
+if [ ! -d $working_folder ]; then
+	echo "Creating folder: $working_folder";
+	mkdir -p $working_folder;
+fi
+
+if [ ! -f $working_folder/$current_day ]; then
+	touch $working_folder/$current_day;
+	echo -e "# $current_year-$current_month-$current_day\n" >> $working_folder/$current_day;
+fi
+
+echo "Diary: $current_year-$current_month-$current_day"
+$EDITOR $working_folder/$current_day

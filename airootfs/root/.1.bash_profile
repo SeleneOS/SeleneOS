@@ -1,4 +1,3 @@
-~/.automated_script.sh
 #
 # ~/.bash_profile
 #
