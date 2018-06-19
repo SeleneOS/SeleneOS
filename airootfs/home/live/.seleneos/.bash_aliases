@@ -1,5 +1,3 @@
-alias ff='for f in nocaseglob nullglob ~/Music/* ; do ffplay -nodisp -autoexit "$f"; done'
-
 # Spells
 alias lumos="ls -lahF"
 alias accio="grep --color=auto"
@@ -37,8 +35,8 @@ alias .d='cd ~/documents'
 alias .m='cd ~/music'
 alias .p='cd ~/pictures'
 alias .v='cd ~/videos'
-alias .s='cd ~/.acharluk/scripts'
-alias .a='cd ~/.acharluk'
+alias .s='cd ~/.seleneos/scripts'
+alias .a='cd ~/.seleneos'
 alias .c='cd ~/.config'
 
 alias l..='l ..'
@@ -92,12 +90,12 @@ gcp() { git add . && git commit -m "$1" && git push; }
 # Easy TODO list
 todo() {
 	if [ $# -gt 0 ]; then
-		echo "[] $@" >> ~/.acharluk/TODO;
+		echo "[] $@" >> ~/.seleneos/TODO;
 	else
-		$EDITOR ~/.acharluk/TODO;
+		$EDITOR ~/.seleneos/TODO;
 	fi
 }
-alias ttodo='$EDITOR2 ~/.acharluk/TODO'
+alias ttodo='$EDITOR2 ~/.seleneos/TODO'
 alias t='todo'
 alias tt='ttodo'
 
@@ -107,10 +105,11 @@ fwm() { while inotifywait "$1"; do make; done }
 fwmr() { while inotifywait "$1"; do make run; done }
 
 
+## TODO: Use Yay instead of Yaourt ##
 # Shortcuts for pacman/yaourt
-alias y='yaourt --noconfirm'
-alias yi='yaourt -S --noconfirm'
-alias yr='sudo pacman -Rs'
-alias yu='sudo pacman -Su'
-alias yyu='yaourt -Syu --aur --noconfirm'
-alias yrd='s pacman -Rs $(pacman -Qtdq)'
+# alias y='yaourt --noconfirm'
+# alias yi='yaourt -S --noconfirm'
+# alias yr='sudo pacman -Rs'
+# alias yu='sudo pacman -Su'
+# alias yyu='yaourt -Syu --aur --noconfirm'
+# alias yrd='s pacman -Rs $(pacman -Qtdq)'

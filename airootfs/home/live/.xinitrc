@@ -1,3 +1,3 @@
 dunst &
 unclutter &
-exec i3 -c ~/.acharluk/i3/config
+exec i3 -c ~/.config/i3/config

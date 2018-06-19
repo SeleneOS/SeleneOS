@@ -1,6 +1,6 @@
 #!/bin/bash
 
-backup=~/.acharluk/backups/last
+backup=~/.seleneos/backups/last
 
 if [ -d $backup ]; then
 	echo "Restoring .bashrc"

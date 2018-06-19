@@ -1,0 +1,5 @@
+# You can remove this file if you don't want to start i3 automatically on login
+
+if [[ "$(tty)" = "/dev/tty1" ]]; then
+    pgrep i3 || startx;
+fi

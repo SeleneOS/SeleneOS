@@ -1,8 +1,8 @@
 #!/bin/bash
 
 current_date=$(date +"%F_%H-%M-%S")
-backup_folder=~/.acharluk/backups/$current_date
-backup_last=~/.acharluk/backups/last 
+backup_folder=~/.seleneos/backups/$current_date
+backup_last=~/.seleneos/backups/last
 
 if [ -f $backup_last ]; then
 	rm -r $backup_last
@@ -19,7 +19,7 @@ if [ -f ~/.bashrc ]; then
     cp ~/.bashrc $backup_last/.bashrc
 fi
 if [ -f ~/.bash_profile ]; then
-    echo "Copying .bash_profile to $backup_folder" 
+    echo "Copying .bash_profile to $backup_folder"
     cp ~/.bash_profile $backup_folder/.bash_profile
     cp ~/.bash_profile $backup_last/.bash_profile
 fi

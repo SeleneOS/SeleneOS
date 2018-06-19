@@ -1,6 +1,6 @@
 #!/bin/bash
 
-base_path=~/.acharluk/diary
+base_path=~/.seleneos/diary
 
 current_day=$(date '+%d')
 current_month=$(date '+%m')

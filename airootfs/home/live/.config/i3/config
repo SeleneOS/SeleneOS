@@ -1,11 +1,6 @@
 #region App paths
 
-set $_terminal	        xfce4-terminal # i3-sensible-terminal
-
-set $_internet_browser	chromium
-set $_code_editor       code
-set $_messaging_app	~/Apps/Telegram/Telegram
-set $_music_player	clementine
+set $_terminal	        xfce4-terminal
 set $_file_manager      nautilus
 
 #endregion
@@ -13,9 +8,9 @@ set $_file_manager      nautilus
 
 #region Other variables
 
-set $_wallpaper_path	~/.acharluk/wallpaper.png
-
-set $_menu_apps "(C)ode (G)oogle (T)elegram"
+set $_wallpaper_path	~/pictures/wallpaper.png
+set $_dropdown_width    1366
+set $_dropdown_height   768
 
 ## MPC bindings
 # set $pause      --no-startup-id mpc toggle
@@ -51,7 +46,7 @@ set $_workspace_10	music
 assign [class="Chromium"]       $_workspace_1
 assign [class="Code"]           $_workspace_3
 assign [class="Telegram"]       $_workspace_9
-assign [class="Clementine"]       $_workspace_10
+assign [class="Clementine"]     $_workspace_10
 
 #endregion
 
@@ -62,13 +57,13 @@ for_window [class="^.*"]        border pixel 3
 for_window [class="Chromium"]   border none
 for_window [class="Code"]       border none
 for_window [class="Telegram"]   border none
-for_window [class="Clementine"]   border none
+for_window [class="Clementine"] border none
 
         #region Scratchpad
 
         # Terminal
         for_window [title="dropdown_terminal"] floating enable
-        for_window [title="dropdown_terminal"] resize set 1366 768
+        for_window [title="dropdown_terminal"] resize set $_dropdown_width $_dropdown_height
         for_window [title="dropdown_terminal"] move scratchpad
 
         exec xfce4-terminal -T dropdown_terminal
@@ -78,7 +73,7 @@ for_window [class="Clementine"]   border none
 
         # Ranger
         for_window [title="floating_ranger"] floating enable
-        for_window [title="floating_ranger"] resize set 1366 768
+        for_window [title="floating_ranger"] resize set $_dropdown_width $_dropdown_height
         for_window [title="floating_ranger"] move scratchpad
 
         exec --no-startup-id xfce4-terminal -e ranger -T floating_ranger
@@ -88,7 +83,7 @@ for_window [class="Clementine"]   border none
 
         # Hidden terminal
         for_window [title="dropdown_hidden"] floating enable
-        for_window [title="dropdown_hidden"] resize set 1366 768
+        for_window [title="dropdown_hidden"] resize set $_dropdown_width $_dropdown_height
         for_window [title="dropdown_hidden"] move scratchpad
 
         bindsym $mod+F12 [title="dropdown_hidden"] scratchpad show; [title="dropdown_hidden"] move position center
@@ -137,7 +132,7 @@ for_window [class="Clementine"]   border none
 
         bindsym $mod+space      exec rofi -show drun
         bindsym $mod+Tab        exec rofi -show window
-        bindsym $mod+Delete     exec acl_dmenu_power
+        bindsym $mod+Delete     exec selene.dmenu_power
 
         #endregion
 
@@ -208,7 +203,7 @@ bindsym $mod+shift+d gaps inner all set 10; gaps outer all set 10
         # finds out, if available)
         bar {
                 font pango:Hack, FontAwesome 12
-                status_command i3blocks -c ~/.acharluk/i3/i3blocks.config
+                status_command i3blocks -c ~/.config/i3/i3blocks.config
                 i3bar_command  i3bar -t
 
                 colors {
@@ -354,8 +349,6 @@ bindsym $mod+r mode "resize"
 #region Run at start (once)
 
 exec --no-startup-id compton
-# exec $_internet_browser
-# exec $_code_editor
 
 #endregion
 
@@ -363,6 +356,8 @@ exec --no-startup-id compton
 #region Run at start (always)
 
 exec_always --no-startup-id feh --bg-fill $_wallpaper_path
-# exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 #endregion
+
+# Live iso
+exec xfce4-terminal -e "vim readme_selene.txt"

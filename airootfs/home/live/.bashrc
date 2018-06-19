@@ -1,1 +1,1 @@
-[[ -f ~/.acharluk/.bashrc ]] && . ~/.acharluk/.bashrc
+[[ -f ~/.seleneos/.bashrc ]] && . ~/.seleneos/.bashrc
