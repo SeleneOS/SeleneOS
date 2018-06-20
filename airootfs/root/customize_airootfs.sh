@@ -11,8 +11,7 @@ usermod -s /usr/bin/bash root
 cp -aT /etc/skel/ /root/
 chmod 700 /root
 
-id -u live && echo "User live exists!" || useradd -G wheel live
-usermod -s /usr/bin/bash live
+! id live && useradd -m -p "" -g users -G "adm,audio,floppy,log,network,rfkill,scanner,storage,optical,power,wheel" -s /usr/bin/bash live
 
 sed -i 's/#\(PermitRootLogin \).\+/\1yes/' /etc/ssh/sshd_config
 sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
